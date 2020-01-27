@@ -17,3 +17,4 @@ def local_tarfile_copy(archive_name, dest_location):
 def remote_tarfile_copy(bucket_name, archive_name):
 	s3_resource = boto3.resource('s3')
 	s3_resource.Object(bucket_name, archive_name).upload_file(Filename=archive_name)
+	os.remove(archive_name)

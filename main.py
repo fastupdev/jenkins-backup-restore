@@ -6,7 +6,7 @@ from jenkins.restore import local_tarfile, remote_tarfile
 
 
 def main():
-	jenkins_home = os.environ.get('JENKINS_HOME')
+	jenkins_home = os.getenv('JENKINS_HOME')
 	date = datetime.date.today()
 
 	parser = argparse.ArgumentParser(prog='jenkins', description='Jenkins Backup and Restore Arguments')
@@ -14,7 +14,7 @@ def main():
 
 	# Main parsers
 	parser.add_argument('--version', action='version', version='%(prog)s 1.0')
-	parser.add_argument('--cn', '--custom-archive-name', help='custom-archive help', default=f'jenkins-backup-{date}.tar.gz', dest='custom_archive_name')
+	parser.add_argument('--cn', '--custom-archive-name', help='custom-archive help', dest='custom_archive_name')
 	parser.add_argument('command', choices=['backup', 'restore'], help='type has only two values either backup or restore')
 
 	# Sub parsers for the backup
@@ -61,10 +61,10 @@ def main():
 				print("Specify the source location")
 
 		if args.func == 'rst-s3':
-			try:
-				remote_tarfile(args.rst_bucket_name, archive_name, args.artifact_dest_path, jenkins_home)
-			except:
-				print("Something is wrong with bucketname or archivename or the downloadable path")
+			#try:
+			remote_tarfile(args.rst_bucket_name, archive_name, args.artifact_dest_path, jenkins_home)
+			#except:
+				#print("Something is wrong with bucketname or archivename or the downloadable path")
 
 
 main()
