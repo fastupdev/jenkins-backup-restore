@@ -3,11 +3,11 @@ from setuptools import setup, find_packages
 with open('requirements.txt') as f:
 	requirements = f.readlines()
 
-long_description = 'Sample Package made for a demo \
-of its making for the GeeksforGeeks Article.'
+long_description = 'Jenkins backup and restore packages \
+with access to push and pull from a local directory or an s3 bucket.'
 
 setup(
-	name='jenkins',
+	name='jenkins-bkp-rst',
 	version='1.0',
 	author='Surya Lolla',
 	author_email='suryasaicharan93@gmail.com',
@@ -16,11 +16,6 @@ setup(
 	long_description_content_type="text/markdown",
 	license='MIT',
 	packages=find_packages(),
-	entry_points={
-		'console_scripts': [
-			'backup = jenkins.backup:main'
-		]
-	},
 	classifiers=(
 		"Programming Language :: Python :: 3",
 		"License :: OSI Approved :: MIT License",
