@@ -8,12 +8,12 @@ from pyfiglet import Figlet
 
 def main():
 	f = Figlet(font='slant')
-	print(f.renderText('Jenkins Backup Restore'))
+	print(f.renderText('Jenkins Backup Restore Cli'))
 
 	jenkins_home = os.getenv('JENKINS_HOME')
 	date = datetime.date.today()
 
-	parser = argparse.ArgumentParser(prog='jenkins-backup-restore', description='Jenkins Backup and Restore Arguments')
+	parser = argparse.ArgumentParser(prog='jenkins-backup-restore-cli', description='Jenkins Backup and Restore Arguments')
 	subparsers = parser.add_subparsers(dest='func')
 
 	# Main parsers
