@@ -17,7 +17,7 @@ def main():
 	subparsers = parser.add_subparsers(dest='func')
 
 	# Main parsers
-	parser.add_argument('--v', '--version', action='version', version='%(prog)s 1.0.0')
+	parser.add_argument('--v', '--version', action='version', version='%(prog)s 1.0.5')
 	parser.add_argument('--cn', '--custom-archive-name', help='Give the backup a custom name ', dest='custom_archive_name')
 	parser.add_argument('command', choices=['backup', 'restore'], help='use either backup to backup or use restore to restore')
 
