@@ -1,6 +1,7 @@
 # Python Jenkins Backup Restore Module
 
 [![PyPI - Downloads](https://img.shields.io/pypi/dm/jenkins-backup-restore-cli?style=plastic)](https://pypi.org/project/jenkins-backup-restore-cli/)
+[![PyPI - Version](https://img.shields.io/pypi/v/jenkins-backup-restore-cli?style=plasticl&logo=pypi)](https://pypi.org/project/jenkins-backup-restore-cli/)
 
 Jenkins-backup-restore module takes a backup of the jenkins home directory and restores it.
 
