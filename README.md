@@ -2,7 +2,7 @@
 
 Jenkins-backup-restore module takes a backup of the jenkins home directory and restores it.
 
-####Backup
+#### Backup
 
 Following are the list of items that the backup module can do,
 
@@ -11,7 +11,7 @@ Following are the list of items that the backup module can do,
 3. Move the backup tar to a specific folder locally (optional with flags).
 4. Push the backup tar to a specific bucket in S3 (optional with flags). 
 
-####Restore
+#### Restore
 Following are the list of items that the restore module can do,
 
 1. Look for the binary in the local file system in the specific destination path.
@@ -19,13 +19,13 @@ Following are the list of items that the restore module can do,
 3. Look for the a artifact binary in the s3 given a specific bucket name and download it in the current directory unless a specific artifact destination path is given. (optional with flags)
 4. Extract the tar file to JENKINS_HOME path (default: /var/jenkins_home)
 
-####Installation
+#### Installation
 Run the following command to install the jenkins-backup-restore tool,
 ```
-pip3 install jenkins-backup-restore
+pip3 install jenkins-backup-restore-cli
 ```
 
-####Backup and Restore Arguments:
+#### Backup and Restore Arguments:
 Once the binary is installed with pip3, use the following command line argument to either take a backup or restore the existing backup.
  
 ```
@@ -54,30 +54,30 @@ Once the binary is installed with pip3, use the following command line argument 
   {backup,restore}                       use either backup to backup or use restore to restore
 ```
 
-####Examples
+#### Examples
 
 To give a custom name to the backup
 ```
-jenkins-backup-restore backup-local --cn <custom-name.tar.gz> backup
+jenkins-backup-restore-cli backup-local --cn <custom-name.tar.gz> backup
 ```
 > If `--backup-destination-path` not specified, stores in the current directory.
 
 To backup jenkins to local directory,
 ```
-jenkins-backup-restore backup-local --backup-destination-path <custom-dir> backup
+jenkins-backup-restore-cli backup-local --backup-destination-path <custom-dir> backup
 ```
 
 To backup jenkins to an s3 bucket,
 ```
-jenkins-backup-restore backup-local --backup-bucket-name <bucket-name> backup
+jenkins-backup-restore-cli backup-local --backup-bucket-name <bucket-name> backup
 ```
 
 To restore an archive from local path,
 ```
-jenkins-backup-restore restore-local --restore-source-path <archive-path> restore
+jenkins-backup-restore-cli restore-local --restore-source-path <archive-path> restore
 ```
 
 To restore an archive from an s3 bucket,
 ```
-jenkins-backup-restore restore-s3 --restore-bucket-name <bucket-name> --artifact-destination-path <path-to-download-in-local> restore
+jenkins-backup-restore-cli restore-s3 --restore-bucket-name <bucket-name> --artifact-destination-path <path-to-download-in-local> restore
 ```

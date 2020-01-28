@@ -12,7 +12,7 @@ with open(path.join(here, 'README.md'), encoding='utf-8') as f:
 
 setup(
 	name='jenkins-backup-restore-cli',
-	version='1.0.1',
+	version='1.0.2',
 	author='Surya Lolla',
 	author_email='suryasaicharan93@gmail.com',
 	description='A Jenkins backup and restore python cli tool with arguments.',
@@ -23,7 +23,7 @@ setup(
 	packages=find_packages(),
 	entry_points={
 		'console_scripts': [
-			'jenkins-backup-restore = main.jenkins_backup_restore:main'
+			'jenkins-backup-restore_cli = main.jenkins_backup_restore_cli:main'
 		]
 	},
 	classifiers=(
