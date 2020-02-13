@@ -1,0 +1,33 @@
+# Default values for helm-chart.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+# use the image repo, image name and image tag from the docker hub.
+# use the imagePullSecrets if there is any docker secrets.
+# Populate the docker credentials in the Kubernetes cluster as a secrets
+image:
+  imageRepository: fastupdev
+  imageName: jenkins-backup-restore-cli
+  imageTag: 1.0.5
+# imagePullSecret: none
+
+# For any name release name overwrites use the below keys
+#nameOverride: ""
+#fullnameOverride: ""
+
+# Generic Service for the deployment
+service:
+  type: ClusterIP
+  port: 80
+
+# volumes
+# For the persistentVolumeClaimName, provide the existing jenkins persistentVoulmeClaimName
+# If Jenkins is running with host volume or the empty dir, directly exec into the jenkins pod
+# and download the jenkins-restore-backup-cli tool using "pip3 install jenkins-restore-backup-cli"
+# run the commands to from the github repo to take backup and restore.
+volumes:
+  volumeName: jenkins-home
+  persistentVolumeClaimName: <persistentVolumeClaimName>
+  mountPath: /tmp

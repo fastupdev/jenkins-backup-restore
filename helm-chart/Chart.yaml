@@ -1,0 +1,16 @@
+apiVersion: v2
+name: helm-chart
+description: A Helm chart for jenkins-backup-restore-cli
+type: application
+version: 0.0.1
+appVersion: 1.0.5
+maintainers:
+  - name: venkatalolla
+    email: suryasaicharan93@gmail.com
+sources:
+  - https://github.com/fastupdev/jenkins-backup-restore
+  - https://pypi.org/project/jenkins-backup-restore-cli/
+keywords:
+  - jenkins
+  - backup
+  - restore
