@@ -19,8 +19,8 @@ def local_tarfile_copy(archive_name, dest_location):
 
 def remote_tarfile_copy(bucket_name, archive_name):
     """remote_tarfile_copy move the tar file from a local dir to an s3 bucket. For this
-    method to work, the AWS credentials should be preset in the terminal from where ever you are
-    running the jenkins-backup-restore-cli from."""
+    method to work, the AWS credentials should be preset either in the terminal session
+    or in the ~/.aws/credentials file from the machine you are running the jenkins-backup-restore-cli from."""
     s3_resource = boto3.resource('s3')
     s3_resource.Object(bucket_name, archive_name).upload_file(Filename=archive_name)
     os.remove(archive_name)
