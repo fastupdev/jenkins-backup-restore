@@ -10,7 +10,7 @@ replicaCount: 1
 image:
   imageRepository: fastupdev
   imageName: jenkins-backup-restore-cli
-  imageTag: 1.0.5
+  imageTag: 1.0.6
 # imagePullSecret: none
 
 # For any name release name overwrites use the below keys
@@ -23,7 +23,7 @@ service:
   port: 80
 
 # volumes
-# For the persistentVolumeClaimName, provide the existing jenkins persistentVoulmeClaimName
+# For the persistentVolumeClaimName, provide the existing jenkins persistentVolumeClaimName
 # If Jenkins is running with host volume or the empty dir, directly exec into the jenkins pod
 # and download the jenkins-restore-backup-cli tool using "pip3 install jenkins-restore-backup-cli"
 # run the commands to from the github repo to take backup and restore.
