@@ -1,8 +1,8 @@
 import click
 import datetime
 from pyfiglet import Figlet
-from jenkins.backup import make_tarfile, local_tarfile_copy, remote_tarfile_copy
-from jenkins.restore import local_tarfile, remote_tarfile
+from .jenkins.backup import make_tarfile, local_tarfile_copy, remote_tarfile_copy
+from .jenkins.restore import local_tarfile, remote_tarfile
 
 date = datetime.date.today()
 
@@ -11,7 +11,7 @@ print(tool_name.renderText('Jenkins Backup Restore Cli'))
 
 
 @click.group()
-@click.version_option(version='1.0.6')
+@click.version_option(version='1.0.7')
 @click.option('--custom-archive-name', default='jenkins-backup-DATE.tar.gz', help='Custom name for the jenkins backup')
 @click.option('--jenkins-home-dir', help='Custom Jenkins home directory other than the default (/var/jenkins_home)', default='/var/jenkins_home')
 @click.pass_context
