@@ -1,75 +1,71 @@
-import argparse
+import click
 import datetime
-import os
+from pyfiglet import Figlet
 from jenkins.backup import make_tarfile, local_tarfile_copy, remote_tarfile_copy
 from jenkins.restore import local_tarfile, remote_tarfile
-from pyfiglet import Figlet
+
+date = datetime.date.today()
+
+tool_name = Figlet(font='big')
+print(tool_name.renderText('Jenkins Backup Restore Cli'))
 
 
-def main():
-	f = Figlet(font='slant')
-	print(f.renderText('Jenkins Backup Restore Cli'))
+@click.group()
+@click.version_option(version='1.0.6')
+@click.option('--custom-archive-name', default='jenkins-backup-DATE.tar.gz', help='Custom name for the jenkins backup')
+@click.option('--jenkins-home-dir', help='Custom Jenkins home directory other than the default (/var/jenkins_home)', default='/var/jenkins_home')
+@click.pass_context
+def jenkins_backup_restore_cli(ctx, custom_archive_name, jenkins_home_dir):
 
-	jenkins_home = os.getenv('JENKINS_HOME')
-	date = datetime.date.today()
+    if custom_archive_name:
+        archive_name = custom_archive_name
+    else:
+        archive_name = f"jenkins-backup-{date}.tar.gz"
 
-	parser = argparse.ArgumentParser(prog='jenkins-backup-restore-cli', description='Jenkins Backup and Restore Arguments')
-	subparsers = parser.add_subparsers(dest='func')
+    if jenkins_home_dir:
+        jenkins_home = jenkins_home_dir
 
-	# Main parsers
-	parser.add_argument('--v', '--version', action='version', version='%(prog)s 1.0.5')
-	parser.add_argument('--cn', '--custom-archive-name', help='Give the backup a custom name ', dest='custom_archive_name')
-	parser.add_argument('command', choices=['backup', 'restore'], help='use either backup to backup or use restore to restore')
-
-	# Sub parsers for the backup
-	local_copy_bkp_parser = subparsers.add_parser('backup-local', help='Save the archive to a local directory')
-	local_copy_bkp_parser.add_argument('-bd', '--backup-destination-path', help='Local path to store the backup', dest='bkp_dest_path')
-	s3_copy_bkp_parser = subparsers.add_parser('backup-s3', help='Push the archive to an s3 bucket')
-	s3_copy_bkp_parser.add_argument('-bb', '--backup-bucket-name', help='Bucket name to push an archive to s3', dest='bkp_bucket_name')
-
-	# Sub parsers for the restore
-	local_copy_rst_parser = subparsers.add_parser('restore-local', help='Restore archive from a local directory')
-	local_copy_rst_parser.add_argument('-rs', '--restore-source-path', help='Path to the archive in local directory', dest='rst_source_path')
-	local_copy_rst_parser.add_argument('-rd', '--restore-destination-path', help='If destination path is other than the default path (/var/jenkins_home)', dest='rst_dest_path', default='/var/jenkins_home')
-	s3_copy_rst_parser = subparsers.add_parser('restore-s3', help='Pull an archive from an s3 bucket to a specific location and restore it')
-	s3_copy_rst_parser.add_argument('-rb', '--restore-bucket-name', help='Bucket name to download the archive from', dest='rst_bucket_name')
-	s3_copy_rst_parser.add_argument('-adp', '--artifact-destination-path', help='Path to save the downloaded archive from an s3 bucket', dest='artifact_dest_path')
-
-	args = parser.parse_args()
-
-	if args.custom_archive_name:
-		archive_name = args.custom_archive_name
-	else:
-		archive_name = f"jenkins-backup-{date}.tar.gz"
-
-	if args.command == 'backup':
-		# calling make_tarfile function
-		make_tarfile(archive_name, jenkins_home)
-
-		if args.func == 'backup-local':
-			try:
-				local_tarfile_copy(archive_name, args.bkp_dest_path)
-			except:
-				print("Specify the destination location")
-
-		if args.func == 'backup-s3':
-			try:
-				remote_tarfile_copy(args.bkp_bucket_name, archive_name)
-			except:
-				print("Specify the bucket location")
-	elif args.command == 'restore':
-		if args.func == 'restore-local':
-			try:
-				local_tarfile(archive_name, args.rst_source_path, args.rst_dest_path)
-			except:
-				print("Specify the source location")
-
-		if args.func == 'restore-s3':
-			try:
-				remote_tarfile(args.rst_bucket_name, archive_name, args.artifact_dest_path, jenkins_home)
-			except:
-				print("Something is wrong with bucketname or archivename or the downloadable path")
+    ctx.obj['archive_name'] = archive_name
+    ctx.obj['jenkins_home'] = jenkins_home
 
 
-if __name__ == "__main__":
-	main()
+@jenkins_backup_restore_cli.command()
+@click.option('--bd', '--backup-destination-path', help='Local path to store the backup')
+@click.pass_context
+def backup_local(ctx, backup_destination_path):
+    make_tarfile(ctx.obj['archive_name'], ctx.obj['jenkins_home'])
+    local_tarfile_copy(ctx.obj['archive_name'], backup_destination_path)
+
+
+@jenkins_backup_restore_cli.command()
+@click.option('--bb', '--backup-bucket-name', help='Bucket name to push the backup tar file to s3')
+@click.pass_context
+def backup_s3(ctx, backup_bucket_name):
+    make_tarfile(ctx.obj['archive_name'], ctx.obj['jenkins_home'])
+    remote_tarfile_copy(backup_bucket_name, ctx.obj['archive_name'])
+
+
+@jenkins_backup_restore_cli.command()
+@click.option('--rs', '--restore-source-path', help='Path to the archive in local directory')
+@click.option('--rd', '--restore-path', help='Use the flag if jenkins_home location is other than the default path (/var/jenkins_home)', default='/var/jenkins_home')
+@click.pass_context
+def restore_local(ctx, restore_source_path, restore_path):
+    local_tarfile(ctx.obj['archive_name'], restore_source_path, restore_path)
+
+
+@jenkins_backup_restore_cli.command()
+@click.option('--rb', '--restore-bucket-name', help='Bucket name to download the backup tar from')
+@click.option('--adp', '--artifact-destination-path', help='Path to save the downloaded archive from an s3 bucket')
+@click.option('--rd', '--restore-path', help='Use the flag if destination path is other than the default path (/var/jenkins_home)', default='/var/jenkins_home')
+@click.pass_context
+def restore_s3(ctx, restore_bucket_name, artifact_destination_path, restore_path):
+    remote_tarfile(restore_bucket_name, ctx.obj['archive_name'], artifact_destination_path, restore_path)
+
+
+jenkins_backup_restore_cli.add_command(backup_local)
+jenkins_backup_restore_cli.add_command(backup_s3)
+jenkins_backup_restore_cli.add_command(restore_local)
+jenkins_backup_restore_cli.add_command(restore_s3)
+
+if __name__ == '__main__':
+    jenkins_backup_restore_cli(obj={})
