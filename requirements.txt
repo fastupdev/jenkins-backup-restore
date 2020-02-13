@@ -1,3 +1,4 @@
+click
 pyfiglet
 botocore
 boto3
