@@ -120,7 +120,7 @@ def remote_tarfile(restore_bucket_name, archive_name, restore_archive_download_p
     :return:
 
     For this method to work, the AWS credentials should be preset in the terminal session from where
-    ever you are running the jenkins-backup-restore-cli from or the AWS_ACCESS_KEY_ID and ACCESS_SECRET_ACCESS_KEY
+    ever you are running the jenkins_backup_restore_cli from or the AWS_ACCESS_KEY_ID and ACCESS_SECRET_ACCESS_KEY
     should be set in the ~/.aws/credentials file.
     """
     # Expand the path if ~ is used

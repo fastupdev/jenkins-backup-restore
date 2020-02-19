@@ -70,7 +70,7 @@ def remote_tarfile_backup(archive_name, jenkins_home, backup_bucket_name, persis
     remote_tarfile_copy create temporary dir in the current path and move the tar to it and then push
     the archive to the s3 bucket. For this method to work, the AWS credentials should be pre-set either
     in the terminal session or in the ~/.aws/credentials file from the machine you are running the
-    jenkins-backup-restore-cli from. Once the archive is pushed to s3 from the temporary directory,
+    jenkins_backup_restore_cli from. Once the archive is pushed to s3 from the temporary directory,
     by default it will delete the temporary directory unless user specified --persist-tmp-archive flag.
 
     :param jenkins_home:

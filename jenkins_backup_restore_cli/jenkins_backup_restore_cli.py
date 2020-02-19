@@ -3,8 +3,8 @@ import time
 import click
 import errno
 from pyfiglet import Figlet
-from subscripts.backup import local_tarfile_backup, remote_tarfile_backup
-from subscripts.restore import local_tarfile_restore, remote_tarfile
+from jenkins_backup_restore_cli.subscripts.backup import local_tarfile_backup, remote_tarfile_backup
+from jenkins_backup_restore_cli.subscripts.restore import local_tarfile_restore, remote_tarfile
 
 
 # Date as global variable
@@ -21,9 +21,9 @@ def validate_argument(ctx, param, value):
     return value
 
 
-# Using click.group to make the jenkins-backup-restore-cli tool as the main command
+# Using click.group to make the jenkins_backup_restore_cli tool as the main command
 @click.group()
-@click.version_option(version='1.0.9')
+@click.version_option(version='1.1.0')
 @click.option('--custom-archive-name',
               help='Custom name for the jenkins backup, defaults to (jenkins_backup)',
               default=f'jenkins_backup')
