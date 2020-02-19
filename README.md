@@ -3,84 +3,135 @@
 [![PyPI - Downloads](https://img.shields.io/pypi/dm/jenkins-backup-restore-cli?style=plastic)](https://pypi.org/project/jenkins-backup-restore-cli/)
 [![PyPI - Version](https://img.shields.io/pypi/v/jenkins-backup-restore-cli?style=plasticl&logo=pypi)](https://pypi.org/project/jenkins-backup-restore-cli/)
 
-Jenkins-backup-restore module takes a backup of the jenkins home directory and restores it.
+jenkins-backup-restore-cli module takes a backup of the jenkins home directory and restores it as required.
 
-#### Backup
+```
+      _            _    _             ____             _
+     | |          | |  (_)           |  _ \           | |
+     | | ___ _ __ | | ___ _ __  ___  | |_) | __ _  ___| | ___   _ _ __
+ _   | |/ _ \ '_ \| |/ / | '_ \/ __| |  _ < / _` |/ __| |/ / | | | '_ \
+| |__| |  __/ | | |   <| | | | \__ \ | |_) | (_| | (__|   <| |_| | |_) |
+ \____/ \___|_| |_|_|\_\_|_| |_|___/ |____/ \__,_|\___|_|\_\\__,_| .__/
+                                                                 | |
+                                                                 |_|
+ _____           _                    _____ _ _
+|  __ \         | |                  / ____| (_)
+| |__) |___  ___| |_ ___  _ __ ___  | |    | |_
+|  _  // _ \/ __| __/ _ \| '__/ _ \ | |    | | |
+| | \ \  __/\__ \ || (_) | | |  __/ | |____| | |
+|_|  \_\___||___/\__\___/|_|  \___|  \_____|_|_|
 
-Following are the list of items that the backup module can do,
 
-1. Look for the JENKINS_HOME env values (or use the default /var/jenkins_home). Export JENKINS_HOME, if does not exists.
-2. Take a backup of the jenkins_home with tar and stores it in current directory (default: /var/jenkins_home)
-3. Move the backup tar to a specific folder locally (optional with flags).
-4. Push the backup tar to a specific bucket in S3 (optional with flags). 
+``` 
 
-#### Restore
-Following are the list of items that the restore module can do,
+## Prerequisites
+- python2.7 or higher
+- pip or pip3 
 
-1. Look for the binary in the local file system in the specific destination path.
-2. Extract the tar file to JENKINS_HOME path (default: /var/jenkins_home)
-3. Look for the a artifact binary in the s3 given a specific bucket name and download it in the current directory unless a specific artifact destination path is given. (optional with flags)
-4. Extract the tar file to JENKINS_HOME path (default: /var/jenkins_home)
-
-#### Installation
-Run the following command to install the jenkins-backup-restore tool,
+## Installation
+Run the following command to install the jenkins-backup-restore-cli,
 ```
 pip3 install jenkins-backup-restore-cli
 ```
 
-#### Backup and Restore Arguments:
-Once the binary is installed with pip3, use the following command line argument to either take a backup or restore the existing backup.
+## What does it do?
+The jenkins-backup-restore-cli tool will backup the jenkins_home directory as well as restores it.
+
+#### Backup
+* The backup module will look for a jenkins-home directory
+* Tar it into a temporary directory.
+* Copy the tarfile to an user specified location or to a AWS s3 bucket.
+* Delete the temporary directory (can be persisted with `--persist-tmp-archive`)
+
+#### Restore
+* The restore module will look for a jenkins-home directory that needs to be restored
+* create a tmp directory and copy the tarfile or download the tarfile from an s3 bucket to it.
+* Untar the tarfile in that temporary directory
+* Make a copy of existing jenkins_home directory
+* Replace the old jenkins_home with the untarred jenkins_home
+* Delete the temporary directory (can be persisted with `--persist-tmp-archive`)
+
+## Backup and restore
+jenkins-backup-restore-cli common options for both backup and restore,
+
+### Common Options
+
+##### `--version`
+Shows version number of the package
+```
+jenkins-backup-restore-cli --version
+```
+
+##### `--custom-archive-name`
+To create a backup tarfile with the custom name, 
+```
+jenkins-backup-restore-cli --custom-archive-name my-backup
+```
+> Note: If not provided, it will backup with the default name (default: jenkins_backup.tar.gz)
+
+
+##### `--jenkins-home-dir`
+* user should provide a `--jenkins-home-dir`. 
+* If the user specified directory does not exists, tool looks for a default location (default: `/var/jenkins_home`)
+* If the default location does not exists, the tool will look for an `JENKINS_HOME` environment variable.
+```
+jenkins-backup-restore-cli --jenkins-home-dir /var/lib/jenkins
+```
+
+> Note:  In above each step the tool will throw a warning and throws an error if environment variable does not exists or 
+> the path set in the value does not exists. 
+
+### Commands
+
+#### Backup Commands
+
+To backup jenkins_home, either one of the following commands with arguments can be used,
+
+* `backup-local` - Take a backup in the local machine (same machine where jenkins is running)
+
+  * `--backup-destination-path`, local path to store the backup
  
 ```
-    --v, --version                      Show program's version number
-
-    --cn, --custom-archive-name         Give the backup a custom name
-    
-    # backup to a local dir command and argument
-    backup-local                        Save the archive to a local directory
-    -bd, --backup-destination-path,     Local path to store the backup
-    
-    # backup to s3 command and argument
-    backup-s3                           Push the archive to an s3 bucket
-    -bb, --backup-bucket-name,          Bucket name to push an archive to s3
-    
-    # restore archive from a local directory 
-    restore-local                        Restore archive from a local directory
-    -rs, --restore-source-path           Path to the archive in local directory
-    -rd, --restore-destination-path      If destination path is other than the default path (/var/jenkins_home)
-    
-    # restore archive from an s3 bucket
-    restore-s3                           Pull an archive from an s3 bucket to a specific location and restore it
-    -rb, --restore-bucket-name           Bucket name to download the archive from
-    -adp, --artifact-destination-path    Path to save the downloaded archive from an s3 bucket
-
-  {backup,restore}                       use either backup to backup or use restore to restore
+jenkins-backup-restore-cli --jenkins-home-dir <jenkins_home> backup-local --backup-destination-path <local-path>
 ```
 
-#### Examples
+* `backup-s3` - Take a backup and push it to an s3 bucket
 
-To give a custom name to the backup
-```
-jenkins-backup-restore-cli backup-local --cn <custom-name.tar.gz> backup
-```
-> If `--backup-destination-path` not specified, stores in the current directory.
+  * `--backup-bucket-name`, s3 bucket name to store the backup.
+  * `--persist-tmp-archive`, persists(True) or delete(False) the archive, in the temporary path once the archive pushed to s3 bucket (default: `False`)
 
-To backup jenkins to local directory,
 ```
-jenkins-backup-restore-cli backup-local --backup-destination-path <custom-dir> backup
+jenkins-backup-restore-cli --jenkins-home-dir <jenkins_home> backup-s3 --backup-bucket-name <bucket-name> --persist-tmp-archive True
 ```
 
-To backup jenkins to an s3 bucket,
+#### Restore Commands
+
+To restore jenkins_home, either one of the following commands with arguments can be used,
+
+* `restore-local` - Restore from a local jenkins backup tarfile
+
+  * `--restore-archive-path`, local path to the backup tarfile
+  * `--persist-tmp-archive`, persists(True) or delete(False) the archive in the temporary path once the archive is extracted to jenkins_home (default: `False`)
+  
 ```
-jenkins-backup-restore-cli backup-local --backup-bucket-name <bucket-name> backup
+jenkins-backup-restore-cli --jenkins-home-dir <jenkins_home> restore-local --restore-archive-path <path-to-backup-tarfile> --persist-tmp-archive True
 ```
 
-To restore an archive from local path,
-```
-jenkins-backup-restore-cli restore-local --restore-source-path <archive-path> restore
-```
+* `restore-s3` - Restore from a s3 bucket
 
-To restore an archive from an s3 bucket,
+  * `--restore-bucket-name`, bucket name to download the archive from
+  * `--restore-archive-download-path`, local path to download the archive from s3 bucket
+  * `--persist-tmp-archive`, persists(True) or delete(False) the archive in the temporary path once the archive is extracted to jenkins_home (default: `False`)
+
 ```
-jenkins-backup-restore-cli restore-s3 --restore-bucket-name <bucket-name> --artifact-destination-path <path-to-download-in-local> restore
+jenkins-backup-restore-cli --jenkins-home-dir <jenkins_home> restore-s3 --restore-bucket-path <bucket-name> --restore-archive-download-path <local-path-to-download-tarfile> --persist-tmp-archive True
 ```
+ 
+##### > Note: For any help, use `--help` flag. 
+
+## Dockerfile
+A [Dockerfile](Dockerfile) that has the jenkins-backup-restore-cli(=>1.1.0) package installed on it.
+
+
+## Helm Chart
+A Helm chart for the jenkins-backup-restore-cli tool to perform backup and restore on Jenkins pod running in a Kubernetes cluster, find a README.md [here](jenkins-backup-restore-cli/README.md). 
