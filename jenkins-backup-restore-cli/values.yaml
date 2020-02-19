@@ -9,7 +9,7 @@ replicaCount: 1
 # Populate the docker credentials in the Kubernetes cluster as a secrets
 image:
   imageRepository: fastupdev
-  imageName: subscripts-backup-restore-cli
+  imageName: jenkins-backup-restore-cli
   imageTag: 1.0.7
 # imagePullSecret: none
 
