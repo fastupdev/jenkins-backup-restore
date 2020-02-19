@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: {{ include "helm-chart.fullname" . }}
   labels:
-    {{- include "helm-chart.labels" . | nindent 4 }}
+  {{- include "helm-chart.labels" . | nindent 4 }}
 spec:
   type: {{ .Values.service.type }}
   ports:
@@ -12,4 +12,4 @@ spec:
       protocol: TCP
       name: http
   selector:
-    {{- include "helm-chart.selectorLabels" . | nindent 4 }}
+  {{- include "helm-chart.selectorLabels" . | nindent 4 }}
