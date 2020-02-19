@@ -127,7 +127,7 @@ jenkins-backup-restore-cli --jenkins-home-dir <jenkins_home> restore-local --res
 jenkins-backup-restore-cli --jenkins-home-dir <jenkins_home> restore-s3 --restore-bucket-path <bucket-name> --restore-archive-download-path <local-path-to-download-tarfile> --persist-tmp-archive True
 ```
  
-##### > Note: For any help, use `--help` flag. 
+> #####  Note: For any help, use `--help` flag. 
 
 ## Dockerfile
 A [Dockerfile](Dockerfile) that has the jenkins-backup-restore-cli(=>1.1.0) package installed on it.
