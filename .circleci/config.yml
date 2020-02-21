@@ -8,4 +8,4 @@ jobs:
     steps:
       - checkout
       - run: echo "hello world"
-      - run: ls jenkins-backup-restore
+      - run: ls
