@@ -130,7 +130,7 @@ jenkins-backup-restore-cli --jenkins-home-dir <jenkins_home> restore-s3 --restor
 > ##### Note: For any help, use `--help` flag. 
 
 ## Dockerfile
-A [Dockerfile](Dockerfile) that has the jenkins-backup-restore-cli(=>1.1.0) package installed on it.
+A [Dockerfile](Dockerfile) that has the jenkins-backup-restore-cli latest package installed on it.
 
 
 ## Helm Chart
