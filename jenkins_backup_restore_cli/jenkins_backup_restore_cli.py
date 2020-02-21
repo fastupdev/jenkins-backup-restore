@@ -21,9 +21,15 @@ def validate_argument(ctx, param, value):
     return value
 
 
+def validate_bucketname(ctx, param, value):
+    if not value:
+        raise click.BadParameter('Argument cannot be empty, please specify a bucket name')
+    return value
+
+
 # Using click.group to make the jenkins_backup_restore_cli tool as the main command
 @click.group()
-@click.version_option(version='1.1.1')
+@click.version_option(version='1.1.2')
 @click.option('--custom-archive-name',
               help='Custom name for the jenkins backup, defaults to (jenkins_backup)',
               default=f'jenkins_backup')
@@ -83,7 +89,7 @@ def jenkins_backup_restore_cli(ctx, custom_archive_name, jenkins_home_dir):
                 else:
 
                     # Let user know it found the path in the environment variable
-                    click.secho(f"Found the {jenkins_home} path in environment variable", fg='green')
+                    click.secho(f"jenkins_home path = {jenkins_home}", fg='green')
 
             else:
 
@@ -94,14 +100,14 @@ def jenkins_backup_restore_cli(ctx, custom_archive_name, jenkins_home_dir):
         else:
 
             # Let user know it found the path in the default path
-            click.secho(f"Found the default path for jenkins_home as {default_jenkins_home_dir} directory", fg='green')
+            click.secho(f"jenkins_home path = {default_jenkins_home_dir}", fg='green')
 
             # Set jenkins_home with default path
             jenkins_home = default_jenkins_home_dir
     else:
 
         # Let user know it found the path in the path specified
-        click.secho(f"Found the jenkins_home path as specified in, {jenkins_home_dir} directory", fg='green')
+        click.secho(f"jenkins_home path = {jenkins_home_dir}", fg='green')
 
         # Set jenkins_home with user specified path
         jenkins_home = jenkins_home_dir
@@ -112,14 +118,18 @@ def jenkins_backup_restore_cli(ctx, custom_archive_name, jenkins_home_dir):
 
 # backup-local command
 @jenkins_backup_restore_cli.command()
-@click.option('--backup-destination-path', help='Local path to store the backup', callback=validate_argument)
+@click.option('--backup-destination-path',
+              help='Local path to store the backup',
+              callback=validate_argument)
 @click.pass_context
 def backup_local(ctx, backup_destination_path):
     local_tarfile_backup(ctx.obj['archive_name'], ctx.obj['jenkins_home'], backup_destination_path)
 
 
 @jenkins_backup_restore_cli.command()
-@click.option('--backup-bucket-name', help='Bucket name to push the backup tar file to s3')
+@click.option('--backup-bucket-name',
+              help='Bucket name to push the backup tar file to s3',
+              callback=validate_bucketname)
 @click.option('--persist-tmp-archive',
               help='Persists(True) or delete(False) the archive, in the temporary path once the archive pushed to s3 bucket, by default it will delete the tmp dir',
               default=False)
@@ -143,7 +153,8 @@ def restore_local(ctx, restore_archive_path, persist_tmp_archive):
 
 @jenkins_backup_restore_cli.command()
 @click.option('--restore-bucket-name',
-              help='Bucket name to download the backup tar from s3')
+              help='Bucket name to download the backup tar from s3',
+              callback=validate_bucketname)
 @click.option('--restore-archive-download-path',
               help='Path to save the downloaded archive from an s3 bucket',
               default=f'{os.getcwd()}',

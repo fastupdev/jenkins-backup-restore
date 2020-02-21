@@ -81,7 +81,7 @@ def local_tarfile_restore(archive_name, restore_archive_path, jenkins_home, pers
         restore_archive_full_path = os.path.expanduser(f'{restore_archive_path}')
 
         # Set a tmp restore path
-        tmp_restore_destination_path = restore_archive_full_path + f"/jenkins_backup_restore_cli_{time.time()}"
+        tmp_restore_destination_path = restore_archive_full_path + f"/jenkins_restore_{time.time()}"
 
         # Create the tmp_directory
         _make_tmp_dir(tmp_restore_destination_path, restore_archive_path)
