@@ -1,0 +1,11 @@
+version: 2.1
+
+jobs:
+  build:
+    build:
+    docker: 
+      - image: python:latest
+    steps:
+      - checkout
+      - run: echo "hello world"
+      - run: ls jenkins-backup-restore
