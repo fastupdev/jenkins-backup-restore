@@ -1,0 +1,11 @@
+Jenkins-backup-restore-cli
+Get the application URL by running these commands:
+
+# Export the pod name,
+export POD_NAME=$(kubectl get pods --namespace {{ .Release.Namespace }} -l "app.kubernetes.io/name={{ include "helm-chart.name" . }},app.kubernetes.io/instance={{ .Release.Name }}" -o jsonpath="{.items[0].metadata.name}")
+
+# Exec into the pod,
+kubectl exec -it ${POD_NAME} --namespace {{ .Release.Namespace }} -- /bin/sh
+
+# Run the command from the below github repo to take jenkins backup and also to restore jenkins,
+https://github.com/fastupdev/jenkins-backup-restore
