@@ -27,9 +27,9 @@ jobs:
 
   tests:
     executor: python-executor
-    - attach_workspace:
-        at: src
     steps:
+      - attach_workspace:
+          at: src
       - run:
           name: python-package-test
           command: |
