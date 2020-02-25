@@ -4,7 +4,7 @@ executors:
   python-executor:
     docker:
       - image: python:latest
-    working_directory: /tmp
+    working_directory: $CIRCLE_WORKING_DIRECTORY
 
 jobs:
   build:
@@ -23,7 +23,7 @@ jobs:
     executor: python-executor
     steps:
       - attach_workspace:
-          at: /tmp/jenkins-workspace
+          at: $CIRCLE_WORKING_DIRECTORY/jenkins-workspace
       - run:
           name: python-package-test
           command: |
