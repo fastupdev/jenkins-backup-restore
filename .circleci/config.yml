@@ -26,8 +26,6 @@ jobs:
   tests:
     executor: python-executor
     steps:
-            #      - attach_workspace:
-            #at: jenkins-ci
       - run:
           name: python-package-test
           command: |
