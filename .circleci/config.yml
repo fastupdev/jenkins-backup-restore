@@ -14,10 +14,10 @@ jobs:
       - run:
           name: python-package-build
           command: |
-          pip install --upgrade setuptools
-          ls -la
-          echo $PWD
-          python sdist bdist_wheel
+            pip install --upgrade setuptools
+            ls -la
+            echo $PWD
+            python sdist bdist_wheel
       - persist_to_workspace:
           root: jenkins-workspace
           paths:
