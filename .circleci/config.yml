@@ -17,7 +17,7 @@ jobs:
             pip install --upgrade setuptools
             python3 setup.py sdist bdist_wheel
       - persist_to_workspace:
-          root: $CIRCLE_WORKING_DIRECTORY
+          root: jenkins-ci
           paths:
             - dist
             - tests
@@ -27,7 +27,7 @@ jobs:
     executor: python-executor
     steps:
       - attach_workspace:
-          at: $CIRCLE_WORKING_DIRECTORY
+          at: jenkins-ci
       - run:
           name: python-package-test
           command: |
