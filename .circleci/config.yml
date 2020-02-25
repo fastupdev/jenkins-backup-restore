@@ -17,7 +17,7 @@ jobs:
           name: python-package-build
           command: |
             pip install --upgrade setuptools
-            python3 setup.py sdist bdist_wheel
+            python3 src/setup.py sdist bdist_wheel
       - persist_to_workspace:
           root: jenkins-ci/src
           paths:
