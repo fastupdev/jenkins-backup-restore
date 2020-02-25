@@ -8,4 +8,4 @@ jobs:
     steps:
       - checkout
       - run: python setup.py install --user
-      - run: python3 jenkins_backup_restore_cli/jenkins_backup_restore_cli.py --help
+      - run: jenkins-backup-restore-cli --help
