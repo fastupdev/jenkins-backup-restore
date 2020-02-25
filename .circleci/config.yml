@@ -1,0 +1,16 @@
+version: 2.1
+
+jobs:
+  build:
+    build:
+    docker: 
+      - image: python:latest
+    steps:
+      - checkout
+      - run:
+          name: python-test
+          command: |
+            echo 'export PATH=/root/.local/bin:$PATH' >> $BASH_ENV
+            source $BASH_ENV
+            python setup.py install --user
+            jenkins-backup-restore-cli --help
