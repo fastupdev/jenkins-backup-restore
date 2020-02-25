@@ -2,6 +2,7 @@
 
 [![PyPI - Downloads](https://img.shields.io/pypi/dm/jenkins-backup-restore-cli?style=plastic)](https://pypi.org/project/jenkins-backup-restore-cli/)
 [![PyPI - Version](https://img.shields.io/pypi/v/jenkins-backup-restore-cli?style=plasticl&logo=pypi)](https://pypi.org/project/jenkins-backup-restore-cli/)
+[![CircleCI](https://circleci.com/gh/fastupdev/jenkins-backup-restore.svg?style=svg)](https://circleci.com/gh/fastupdev/jenkins-backup-restore)
 
 jenkins-backup-restore-cli module takes a backup of the jenkins home directory and restores it as required.
 
