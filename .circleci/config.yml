@@ -10,14 +10,16 @@ jobs:
   build:
     executor: python-executor
     steps:
-      - checkout
+      - run: mkdir src
+      - checkout:
+          path: jenkins-ci/src
       - run:
           name: python-package-build
           command: |
             pip install --upgrade setuptools
             python3 setup.py sdist bdist_wheel
       - persist_to_workspace:
-          root: jenkins-ci
+          root: jenkins-ci/src
           paths:
             - dist
             - tests
@@ -25,6 +27,8 @@ jobs:
 
   tests:
     executor: python-executor
+    - attach_workspace:
+        at: src
     steps:
       - run:
           name: python-package-test
