@@ -17,15 +17,17 @@ jobs:
             pip install --upgrade setuptools
             python3 setup.py sdist bdist_wheel
       - persist_to_workspace:
-          root: jenkins-workspace
+          root: $CIRCLE_WORKING_DIRECTORY
           paths:
             - dist
+            - tests
+            - '*.py'
 
   tests:
     executor: python-executor
     steps:
       - attach_workspace:
-          at: $CIRCLE_WORKING_DIRECTORY/jenkins-workspace
+          at: $CIRCLE_WORKING_DIRECTORY
       - run:
           name: python-package-test
           command: |
