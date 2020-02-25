@@ -4,7 +4,7 @@ executors:
   python-executor:
     docker:
       - image: python:latest
-    working_directory: $CIRCLE_WORKING_DIRECTORY
+    working_directory: jenkins-ci
 
 jobs:
   build:
@@ -15,9 +15,7 @@ jobs:
           name: python-package-build
           command: |
             pip install --upgrade setuptools
-            ls -la
-            echo $PWD
-            python sdist bdist_wheel
+            python3 setup.py sdist bdist_wheel
       - persist_to_workspace:
           root: jenkins-workspace
           paths:
