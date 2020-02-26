@@ -32,5 +32,6 @@ function backup_test(){
 }
 
 function restore_test() {
-  jenkins-backup-restore-cli --jenkins-home-dir "$jenkins_home_path" restore-local --restore-archive-path "$tmp_dir"jenkins_backup_*
+  backup_dir=$(ls $tmp_dir)
+  jenkins-backup-restore-cli --jenkins-home-dir "$jenkins_home_path" restore-local --restore-archive-path "$tmp_dir"/"$backup_dir"
 }
