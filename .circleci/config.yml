@@ -35,7 +35,7 @@ workflows:
 
   jenkins-backup-restore-cli:
     jobs:
-      - build
-      - tests:
+      - build_package
+      - functional_tests:
           requires:
-            - build
+            - build_package
