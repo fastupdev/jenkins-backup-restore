@@ -10,7 +10,7 @@ replicaCount: 1
 image:
   imageRepository: fastdevup
   imageName: jenkins-backup-restore-cli
-  imageTag: 1.1.4
+  imageTag: 1.1.9
 # imagePullSecret: none
 
 # For any name release name overwrites use the below keys

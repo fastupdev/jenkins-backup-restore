@@ -30,12 +30,11 @@ with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
 
 setup(
     name='jenkins-backup-restore-cli',
-    version='1.1.4',
+    version='1.1.9',
     author='Venkata Surya Lolla',
     author_email='suryasaicharan93@gmail.com',
     description='A Jenkins backup and restore python cli tool with arguments.',
     long_description=long_description,
-    long_description_content_type="text/markdown",
     project_urls={
         "Code": "https://github.com/fastupdev/jenkins-backup-restore",
         "Issue tracker": "https://github.com/fastupdev/jenkins-backup-restore/issues"
