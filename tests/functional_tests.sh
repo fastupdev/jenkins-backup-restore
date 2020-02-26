@@ -27,11 +27,11 @@ function prereq_install() {
   _install_cli_pakcage
 }
 
-function backup_test(){
+function backup_local_test(){
   jenkins-backup-restore-cli --jenkins-home-dir "$jenkins_home_path" backup-local --backup-destination-path "$tmp_dir"
 }
 
-function restore_test() {
+function restore_local_test() {
   backup_dir=$(ls $tmp_dir)
   jenkins-backup-restore-cli --jenkins-home-dir "$jenkins_home_path" restore-local --restore-archive-path "$tmp_dir"/"$backup_dir"
 }
