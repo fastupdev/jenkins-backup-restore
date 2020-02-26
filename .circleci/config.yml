@@ -1,16 +1,41 @@
 version: 2.1
 
+executors:
+  python-executor:
+    docker:
+      - image: python:latest
+    working_directory: jenkins-ci
+
 jobs:
   build:
-    build:
-    docker: 
-      - image: python:latest
+    executor: python-executor
     steps:
       - checkout
       - run:
-          name: python-test
+          name: python-package-build
           command: |
-            echo 'export PATH=/root/.local/bin:$PATH' >> $BASH_ENV
-            source $BASH_ENV
-            python setup.py install --user
-            jenkins-backup-restore-cli --help
+            pip install --upgrade setuptools
+            python3 setup.py sdist bdist_wheel
+
+  tests:
+    executor: python-executor
+    steps:
+      - checkout
+      - run:
+          name: python-package-test
+          command: |
+            chmod 700 tests/functional_tests.sh
+            source tests/functional_tests.sh
+            prereq_install
+            backup_local_test
+            restore_local_test
+
+workflows:
+  version: 2
+
+  jenkins-backup-restore-cli:
+    jobs:
+      - build
+      - tests:
+          requires:
+            - build

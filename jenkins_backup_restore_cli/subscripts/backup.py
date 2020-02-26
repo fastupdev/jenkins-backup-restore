@@ -63,7 +63,7 @@ def local_tarfile_backup(archive_name, jenkins_home, backup_destination_path):
     :return:
     """
 
-    backup_bucket_name = ''
+    backup_bucket_name = None
 
     # If --backup-destination-path is specified by user
     if backup_destination_path:
@@ -74,7 +74,7 @@ def local_tarfile_backup(archive_name, jenkins_home, backup_destination_path):
         # the user specified path
         _make_tmp_dir_and_move_tar_to_tmp(tmp_backup_destination_path, archive_name, jenkins_home)
 
-        _backup_message(tmp_backup_destination_path, archive_name)
+        _backup_message(tmp_backup_destination_path, archive_name, backup_bucket_name)
 
     else:
         # Get current directory
