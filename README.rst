@@ -2,8 +2,9 @@ Python Jenkins Backup Restore Module
 ====================================
 
 |PyPI - Downloads| |PyPI - Version| |PyPI - Status| |CircleCI - Build|
-|Docker| |Libraries-Rank| jenkins-backup-restore-cli module takes a
-backup of the jenkins home directory and restores it as required.
+|Docker| |Libraries-Rank|
+
+jenkins-backup-restore-cli module takes a backup of the jenkins home directory and restores it as required.
 
 ::
 
@@ -71,7 +72,7 @@ Backup and restore
 jenkins-backup-restore-cli common options for both backup and restore,
 
 Common Options
-~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^
 
 .. _--version:
 
@@ -198,15 +199,17 @@ A Helm chart for the jenkins-backup-restore-cli tool to perform backup
 and restore on Jenkins pod running in a Kubernetes cluster, find a
 README.md `here`_.
 
-Contributons
------------
+Contributions
+-------------
 
-|GitHub - Commits| |GitHub - PRs| All source code is hosted on
-`GitHub`_. Contributions are welcome. Contribution Guide
-`here <CONTRIBUTING.rst>`__
+|GitHub - Commits| |GitHub - PRs|
+
+All source code is hosted on `GitHub`_. Contributions are welcome. Contribution Guide `here <CONTRIBUTING.md>`__
+
+Happy CI/CD!! 🚀
 
 .. _Dockerfile: Dockerfile
-.. _here: jenkins-backup-restore-cli/README.md
+.. _here: jenkins-backup-restore-cli-chart/README.md
 .. _GitHub: https://github.com/fastupdev/jenkins-backup-restore
 
 

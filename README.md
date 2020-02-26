@@ -6,6 +6,7 @@
 [![CircleCI - Build](https://img.shields.io/circleci/build/gh/fastupdev/jenkins-backup-restore?style=plastic&logo=circleci)](https://img.shields.io/circleci/build/gh/fastupdev/jenkins-backup-restore)
 [![Docker](https://img.shields.io/docker/pulls/fastdevup/jenkins-backup-restore-cli?style=plastic&?logo=docker)](https://img.shields.io/docker/pulls/fastdevup/jenkins-backup-restore-cli)
 [![Libraries-Rank](https://img.shields.io/librariesio/sourcerank/pypi/jenkins-backup-restore-cli.svg?logo=koding&logoColor=white)](https://libraries.io/pypi/jenkins-backup-restore-cli)
+
 jenkins-backup-restore-cli module takes a backup of the jenkins home directory and restores it as required.
 
 ```
@@ -140,11 +141,14 @@ A [Dockerfile](Dockerfile) that has the jenkins-backup-restore-cli latest packag
 
 
 ## Helm Chart
-A Helm chart for the jenkins-backup-restore-cli tool to perform backup and restore on Jenkins pod running in a Kubernetes cluster, find a README.md [here](jenkins-backup-restore-cli/README.md). 
+A Helm chart for the jenkins-backup-restore-cli tool to perform backup and restore on Jenkins pod running in a Kubernetes cluster, find a README.md [here](jenkins-backup-restore-cli-chart/README.md). 
 
 
-## Contriutons
+## Contributions
 [![GitHub - Commits](https://img.shields.io/github/commit-activity/m/fastupdev/jenkins-backup-restore.svg?logo=git&logoColor=white)](https://github.com/fastupdev/jenkins-backup-restore/graphs/commit-activity)
 [![GitHub - PRs](https://img.shields.io/github/issues-pr-closed/fastupdev/jenkins-backup-restore.svg?logo=github&logoColor=white)](https://github.com/fastupdev/jenkins-backup-restore/pulls)
+
 All source code is hosted on [GitHub](https://github.com/fastupdev/jenkins-backup-restore). Contributions are welcome.
-Contribution Guide [here](CONTRIBUTING.rst)
+Contribution Guide [here](CONTRIBUTING.md)
+
+Happy CI/CD!! 🚀
