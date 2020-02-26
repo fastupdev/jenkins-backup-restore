@@ -15,7 +15,7 @@ jobs:
           name: python-package-build
           command: |
             pip install --upgrade setuptools
-            python3 src/setup.py sdist bdist_wheel
+            python3 setup.py sdist bdist_wheel
 
   tests:
     executor: python-executor
