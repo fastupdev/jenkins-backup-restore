@@ -218,11 +218,11 @@ Happy CI/CD!! 🚀
 .. |PyPI - Version| image:: https://img.shields.io/pypi/v/jenkins-backup-restore-cli?style=plasticl&logo=pypi
    :target: https://pypi.org/project/jenkins-backup-restore-cli/
 .. |PyPI - Status| image:: https://img.shields.io/pypi/status/jenkins-backup-restore-cli?style=plasticl&logo=pypi
-   :target: https://img.shields.io/pypi/status/jenkins-backup-restore-cli
+   :target: https://pypi.org/project/jenkins-backup-restore-cli/
 .. |CircleCI - Build| image:: https://img.shields.io/circleci/build/gh/fastupdev/jenkins-backup-restore?style=plastic&logo=circleci
    :target: https://circleci.com/gh/fastupdev/workflows/jenkins-backup-restore/tree/master
 .. |Docker| image:: https://img.shields.io/docker/pulls/fastdevup/jenkins-backup-restore-cli?style=plastic&logo=docker
-   :target: https://img.shields.io/docker/pulls/fastdevup/jenkins-backup-restore-cli
+   :target: https://hub.docker.com/repository/docker/fastdevup/jenkins-backup-restore-cli
 .. |Libraries-Rank| image:: https://img.shields.io/librariesio/sourcerank/pypi/jenkins-backup-restore-cli.svg?logo=koding&logoColor=white
    :target: https://libraries.io/pypi/jenkins-backup-restore-cli
 .. |GitHub - Commits| image:: https://img.shields.io/github/commit-activity/m/fastupdev/jenkins-backup-restore.svg?logo=git&logoColor=white
