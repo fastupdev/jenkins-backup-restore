@@ -1,10 +1,10 @@
 # Python Jenkins Backup Restore Module
 
-[![PyPI - Downloads](https://img.shields.io/pypi/dm/jenkins-backup-restore-cli?style=plastic)](https://pypi.org/project/jenkins-backup-restore-cli/)
+[![PyPI - Downloads](https://img.shields.io/pypi/dm/jenkins-backup-restore-cli?style=plastic&logo=pypi)](https://pypi.org/project/jenkins-backup-restore-cli/)
 [![PyPI - Version](https://img.shields.io/pypi/v/jenkins-backup-restore-cli?style=plasticl&logo=pypi)](https://pypi.org/project/jenkins-backup-restore-cli/)
 [![PyPI - Status](https://img.shields.io/pypi/status/jenkins-backup-restore-cli?style=plasticl&logo=pypi)](https://img.shields.io/pypi/status/jenkins-backup-restore-cli)
-[![CircleCI - Build](https://img.shields.io/circleci/build/gh/fastupdev/jenkins-backup-restore?style=plastic&logo=circleci)](https://img.shields.io/circleci/build/gh/fastupdev/jenkins-backup-restore)
-[![Docker](https://img.shields.io/docker/pulls/fastdevup/jenkins-backup-restore-cli?style=plastic&?logo=docker)](https://img.shields.io/docker/pulls/fastdevup/jenkins-backup-restore-cli)
+[![CircleCI - Build](https://img.shields.io/circleci/build/gh/fastupdev/jenkins-backup-restore?style=plastic&logo=circleci)](https://circleci.com/gh/fastupdev/workflows/jenkins-backup-restore/tree/master)
+[![Docker](https://img.shields.io/docker/pulls/fastdevup/jenkins-backup-restore-cli?style=plastic&logo=docker)](https://img.shields.io/docker/pulls/fastdevup/jenkins-backup-restore-cli)
 [![Libraries-Rank](https://img.shields.io/librariesio/sourcerank/pypi/jenkins-backup-restore-cli.svg?logo=koding&logoColor=white)](https://libraries.io/pypi/jenkins-backup-restore-cli)
 
 jenkins-backup-restore-cli module takes a backup of the jenkins home directory and restores it as required.
