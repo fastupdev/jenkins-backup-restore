@@ -24,7 +24,9 @@ jobs:
       - run:
           name: python-package-test
           command: |
-            source tests/functional_test.sh
+            ls -la
+            chmod 700 tests/functional_tests.sh
+            source tests/functional_tests.sh
             prereq_install
             backup_test
             restore_test
