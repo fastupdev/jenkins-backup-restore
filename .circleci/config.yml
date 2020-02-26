@@ -7,7 +7,7 @@ executors:
     working_directory: jenkins-ci
 
 jobs:
-  build:
+  build_package:
     executor: python-executor
     steps:
       - checkout
@@ -17,7 +17,7 @@ jobs:
             pip install --upgrade setuptools
             python3 setup.py sdist bdist_wheel
 
-  tests:
+  functional_tests:
     executor: python-executor
     steps:
       - checkout
