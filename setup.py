@@ -30,7 +30,7 @@ with open(path.join(here, 'README.md'), encoding='utf-8') as f:
 
 setup(
     name='jenkins-backup-restore-cli',
-    version='1.1.2',
+    version='1.1.3',
     author='Surya Lolla',
     author_email='suryasaicharan93@gmail.com',
     description='A Jenkins backup and restore python cli tool with arguments.',
