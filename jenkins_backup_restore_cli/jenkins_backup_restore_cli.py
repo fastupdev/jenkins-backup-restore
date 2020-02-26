@@ -29,7 +29,7 @@ def validate_bucketname(ctx, param, value):
 
 # Using click.group to make the jenkins_backup_restore_cli tool as the main command
 @click.group()
-@click.version_option(version='1.1.3')
+@click.version_option(version='1.1.4')
 @click.option('--custom-archive-name',
               help='Custom name for the jenkins backup, defaults to (jenkins_backup)',
               default=f'jenkins_backup')

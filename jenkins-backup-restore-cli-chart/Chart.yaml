@@ -3,7 +3,7 @@ name: jenkins-backup-restore-cli
 description: A Helm chart for subscripts-backup-restore-cli
 type: application
 version: 0.0.1
-appVersion: 1.1.3
+appVersion: 1.1.4
 maintainers:
   - name: venkatalolla
     email: suryasaicharan93@gmail.com

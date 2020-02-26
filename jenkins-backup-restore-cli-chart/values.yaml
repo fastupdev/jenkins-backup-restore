@@ -8,9 +8,9 @@ replicaCount: 1
 # use the imagePullSecrets if there is any docker secrets.
 # Populate the docker credentials in the Kubernetes cluster as a secrets
 image:
-  imageRepository: fastupdev
+  imageRepository: fastdevup
   imageName: jenkins-backup-restore-cli
-  imageTag: 1.1.3
+  imageTag: 1.1.4
 # imagePullSecret: none
 
 # For any name release name overwrites use the below keys
