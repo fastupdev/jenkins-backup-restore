@@ -6,6 +6,7 @@
 [![CircleCI - Build](https://img.shields.io/circleci/build/gh/fastupdev/jenkins-backup-restore?style=plastic&logo=circleci)](https://circleci.com/gh/fastupdev/workflows/jenkins-backup-restore/tree/master)
 [![Docker](https://img.shields.io/docker/pulls/fastdevup/jenkins-backup-restore-cli?style=plastic&logo=docker)](https://hub.docker.com/repository/docker/fastdevup/jenkins-backup-restore-cli)
 [![Libraries-Rank](https://img.shields.io/librariesio/sourcerank/pypi/jenkins-backup-restore-cli.svg?logo=koding&logoColor=white)](https://libraries.io/pypi/jenkins-backup-restore-cli)
+[![BCH compliance](https://bettercodehub.com/edge/badge/fastupdev/jenkins-backup-restore?branch=master)](https://bettercodehub.com/)
 
 jenkins-backup-restore-cli module takes a backup of the jenkins home directory and restores it as required.
 
